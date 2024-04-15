@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/payment/v1/ticket-booking")
+@RequestMapping("api/v1/ticket-booking/payments")
 @RequiredArgsConstructor
 public class PaymentController {
     private final PaymentService paymentService;
