@@ -22,4 +22,11 @@ public class ConcertService {
     public Concert updateConcert(Concert concert){
         return concertRepository.save(concert);
     }
+
+    public void deleteById(Long id){
+        concertRepository.deleteById(id);
+    }
+    public Concert createConcert(Concert contact){
+        return concertRepository.save(contact);
+    }
 }
