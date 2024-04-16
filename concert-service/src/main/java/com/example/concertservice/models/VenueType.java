@@ -1,8 +1,10 @@
 package com.example.concertservice.models;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
 @Entity
+@Data
 @Table(name = "venue_types")
 public class VenueType {
 

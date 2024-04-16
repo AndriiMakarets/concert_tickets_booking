@@ -50,8 +50,6 @@ public class Event {
     @JoinColumn(name = "venue_id", nullable = false)
     private Venue venue;
 
-    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Long> ticketsId;
 
     @Column(name = "created_at", nullable = false, updatable = false)
     @Temporal(TemporalType.TIMESTAMP)

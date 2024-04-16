@@ -1,11 +1,13 @@
 package com.example.concertservice.models;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
 import java.util.Date;
 import java.util.List;
 
 @Entity
+@Data
 @Table(name = "venues")
 public class Venue {
     @Id
@@ -49,91 +51,4 @@ public class Venue {
         updatedAt = new Date();
     }
 
-    public Venue(Long id, String name, String address, Integer capacity, VenueType venueType, String description, List<Event> events,
-                 Date createdAt, Date updatedAt) {
-        this.id = id;
-        this.name = name;
-        this.address = address;
-        this.capacity = capacity;
-        this.venueType = venueType;
-        this.description = description;
-        this.events = events;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
-    }
-
-    public Venue() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public Integer getCapacity() {
-        return capacity;
-    }
-
-    public void setCapacity(Integer capacity) {
-        this.capacity = capacity;
-    }
-
-    public String getVenueType() {
-        return venueType;
-    }
-
-    public void setVenueType(String venueType) {
-        this.venueType = venueType;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public List<Event> getEvents() {
-        return events;
-    }
-
-    public void setEvents(List<Event> events) {
-        this.events = events;
-    }
-
-    public Date getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public Date getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(Date updatedAt) {
-        this.updatedAt = updatedAt;
-    }
 }
