@@ -1,3 +1,5 @@
+package com.example.concertservice.models;
+
 import jakarta.persistence.*;
 import lombok.*;
 

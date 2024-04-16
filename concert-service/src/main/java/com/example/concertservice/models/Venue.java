@@ -21,9 +21,6 @@ public class Venue {
     @Column(nullable = false)
     private Integer capacity;
 
-    @Column(name = "venue_type")
-    private String venueType;
-
     @Column(length = 1000)
     private String description;
 
@@ -52,7 +49,7 @@ public class Venue {
         updatedAt = new Date();
     }
 
-    public Venue(Long id, String name, String address, Integer capacity, String venueType, String description, List<Event> events,
+    public Venue(Long id, String name, String address, Integer capacity, VenueType venueType, String description, List<Event> events,
                  Date createdAt, Date updatedAt) {
         this.id = id;
         this.name = name;
