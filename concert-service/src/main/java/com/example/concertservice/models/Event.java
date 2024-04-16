@@ -1,6 +1,5 @@
 package com.example.concertservice.models;
 
-package com.example.paymentservice.models;
 
 import jakarta.persistence.*;
 import jakarta.persistence.Table;

@@ -1,7 +1,6 @@
 package com.example.paymentservice.models;
 import jakarta.persistence.*;
 
-import org.springframework.data.annotation.Id;
 
 
 import java.util.Date;
@@ -10,7 +9,6 @@ import java.util.Set;
 @Entity
 @Table(name = "users")
 public class User<Booking> {
-    @jakarta.persistence.Id
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
