@@ -18,6 +18,10 @@ import lombok.*;
         private Long id;
 
         @ManyToOne(fetch = FetchType.LAZY)
+        @JoinColumn(name = "seat_id")
+        private Long seat;
+
+        @ManyToOne(fetch = FetchType.LAZY)
         @JoinColumn(name = "event_id", nullable = false)
         private Event event;
 

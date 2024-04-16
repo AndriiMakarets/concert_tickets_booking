@@ -21,9 +21,16 @@ public class Event<Ticket, Venue> {
     @Column(length = 500)
     private String description;
 
+    //@ManyToOne(fetch = FetchType.LAZY)
+    //@JoinColumn(name = "organizer_id")
+    //private User organizer;
+
+    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Seat> seats;
+
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "organizer_id")
-    private User organizer;
+    @JoinColumn(name = "event_type_id", nullable = false)
+    private EventType eventType;
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "event_date", nullable = false)
@@ -42,7 +49,7 @@ public class Event<Ticket, Venue> {
     private Venue venue;
 
     @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Ticket> tickets;
+    private List<Long> ticketsId;
 
     @Column(name = "created_at", nullable = false, updatable = false)
     @Temporal(TemporalType.TIMESTAMP)

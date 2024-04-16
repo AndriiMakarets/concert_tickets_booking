@@ -1,4 +1,4 @@
-package com.example.paymentservice.models;
+/*package com.example.paymentservice.models;
 import jakarta.persistence.*;
 
 
@@ -162,4 +162,4 @@ public class User<Booking> {
     public void setBookings(Set<Booking> bookings) {
         this.bookings = bookings;
     }
-}
+}*/

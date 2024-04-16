@@ -7,14 +7,14 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 @Entity
-@Table(name = "payments") // Ensure table name is correctly set
+@Table(name = "payments")
 @Builder
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString // If you want to include a default toString method
-@EqualsAndHashCode // If you want to include default equals and hashCode methods based on the id
+@ToString
+@EqualsAndHashCode
 public class Payment {
 
     @Id
