@@ -13,5 +13,4 @@ public interface EventMapper {
     EventDTO toDTO(Event event);
     List<EventDTO> listToDTO(List<Event> events);
 
-    Event toEvent(EventCreationDTO eventDTO);
 }

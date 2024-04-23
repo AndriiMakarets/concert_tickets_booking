@@ -7,7 +7,10 @@ import jakarta.persistence.Id;
 import lombok.*;
 
     import jakarta.persistence.*;
-    import java.math.BigDecimal;
+import org.antlr.v4.runtime.misc.NotNull;
+import org.hibernate.annotations.CollectionId;
+
+import java.math.BigDecimal;
     import java.util.Date;
 
     @Data
@@ -18,12 +21,14 @@ import lombok.*;
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         private Long id;
 
-        @ManyToOne(fetch = FetchType.LAZY)
-        @JoinColumn(name = "seat_id")
+//        @OneToOne(fetch = FetchType.LAZY)
+//        @JoinColumn(name = "seat_id")
+        @Column(name = "seat_id", nullable = false)
         private Long seat;
 
-        @ManyToOne(fetch = FetchType.LAZY)
-        @JoinColumn(name = "event_id", nullable = false)
+//        @ManyToOne(fetch = FetchType.LAZY)
+//        @JoinColumn(name = "event_id", nullable = false)
+        @Column(name = "event_id", nullable = false)
         private Long eventId;
 
         @Column(nullable = false)

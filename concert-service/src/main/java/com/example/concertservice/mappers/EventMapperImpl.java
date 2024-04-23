@@ -2,6 +2,7 @@ package com.example.concertservice.mappers;
 
 import com.example.concertservice.dto.EventCreationDTO;
 import com.example.concertservice.dto.EventDTO;
+import com.example.concertservice.exceptions.ResourceNotFoundException;
 import com.example.concertservice.models.Event;
 import com.example.concertservice.models.EventTypes;
 import com.example.concertservice.models.Seat;
@@ -24,7 +25,24 @@ public class EventMapperImpl implements EventMapper {
 
     @Override
     public Event toEvent(EventDTO eventDTO) {
-        return null;
+        EventTypes eventType = eventTypeService
+                .getEventTypeById(eventDTO.getEventTypeID())
+                .orElseThrow(()-> new ResourceNotFoundException("event type does not exist"));
+        List<Seat> seats = seatService.createSeats(eventDTO.getSeatsAmount());
+        Venue venue = venueService
+                .getVenueById(eventDTO.getVenueID())
+                .orElseThrow(()-> new ResourceNotFoundException("venue does not exist"));;
+        return Event
+                .builder()
+                .eventDate(eventDTO.getEventDate())
+                .description(eventDTO.getDescription())
+                .name(eventDTO.getName())
+                .saleEndDate(eventDTO.getSaleEndDate())
+                .saleStartDate(eventDTO.getSaleStartDate())
+                .seats(seats)
+                .venue(venue)
+                .eventType(eventType)
+                .build();
     }
 
     @Override
@@ -37,22 +55,5 @@ public class EventMapperImpl implements EventMapper {
         return null;
     }
 
-    @Override
-    public Event toEvent(EventCreationDTO eventDTO) {
-        EventTypes eventType = eventTypeService.getEventTypeByID(eventDTO.getEventTypeID());
-        List<Seat> seats = seatService.createSeats(eventDTO.getSeatsAmount());
-        Venue venue = venueService.getVenueByID(eventDTO.getVenueID());
-        return Event
-                .builder()
-                .eventDate(eventDTO.getEventDate())
-                .description(eventDTO.getDescription())
-                .name(eventDTO.getName())
-                .saleEndDate(eventDTO.getSaleEndDate())
-                .saleStartDate(eventDTO.getSaleStartDate())
-                .seats(seats)
-                .venue(venue)
-                .eventType(eventType)
-                .build();
 
-    }
 }

@@ -7,6 +7,7 @@ import lombok.*;
 @Table(name = "seats")
 @Getter
 @Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
@@ -21,7 +22,7 @@ public class Seat {
     @JoinColumn(name = "event_id")
     private Event event;
 
-    @Column(name = "row_number")
+    @Column(name = "`row_number`")
     private int rowNumber;  // номер ряду
 
     @Column(name = "seat_number")

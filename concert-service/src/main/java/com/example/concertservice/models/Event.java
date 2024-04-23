@@ -3,16 +3,18 @@ package com.example.concertservice.models;
 
 import jakarta.persistence.*;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 
 import java.util.Date;
 import java.util.List;
 
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "events")
 public class Event {
@@ -62,9 +64,6 @@ public class Event {
     @Temporal(TemporalType.TIMESTAMP)
     private Date updatedAt;
 
-    public Event() {
-
-    }
 
     @PrePersist
     protected void onCreate() {

@@ -1,13 +1,19 @@
 package com.example.concertservice.models;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
 
 import java.util.Date;
 import java.util.List;
 
 @Entity
 @Data
+@Builder
+@AllArgsConstructor
+@RequiredArgsConstructor
 @Table(name = "venues")
 public class Venue {
     @Id
