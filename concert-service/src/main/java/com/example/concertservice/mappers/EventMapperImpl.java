@@ -2,11 +2,10 @@ package com.example.concertservice.mappers;
 
 import com.example.concertservice.dto.EventCreationDTO;
 import com.example.concertservice.dto.EventDTO;
-import com.example.concertservice.exceptions.ResourceNotFoundException;
-import com.example.concertservice.models.Event;
-import com.example.concertservice.models.EventTypes;
-import com.example.concertservice.models.Seat;
-import com.example.concertservice.models.Venue;
+import com.example.concertservice.exceptions.*;
+
+import com.example.concertservice.models.*;
+
 import com.example.concertservice.services.EventTypeService;
 import com.example.concertservice.services.SeatService;
 import com.example.concertservice.services.VenueService;
@@ -25,7 +24,8 @@ public class EventMapperImpl implements EventMapper {
 
     @Override
     public Event toEvent(EventDTO eventDTO) {
-        EventTypes eventType = eventTypeService
+
+       EventTypes eventType = eventTypeService
                 .getEventTypeById(eventDTO.getEventTypeID())
                 .orElseThrow(()-> new ResourceNotFoundException("event type does not exist"));
             Venue venue = venueService
