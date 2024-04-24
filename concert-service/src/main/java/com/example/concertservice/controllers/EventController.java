@@ -87,7 +87,7 @@ public class EventController {
     @Transactional
     @GetMapping("/{id}/free-seats")
     public ResponseEntity<List<Seat>> getFreeSeats(@PathVariable Long id) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(eventService.getFreeSeats(id));
+        return ResponseEntity.status(HttpStatus.CREATED).body(seatService.getFreeSeatsForConcert(id));
     }
 
 

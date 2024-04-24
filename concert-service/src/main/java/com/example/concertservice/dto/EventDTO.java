@@ -12,6 +12,8 @@ import java.util.Date;
 @Setter
 public class EventDTO {
     private int seatsAmount;
+    private int rows;
+    private int columns;
     private String name;
     private String description;
     private Long eventTypeID;

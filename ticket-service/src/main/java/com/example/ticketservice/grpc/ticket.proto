@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package ticketservice;
+
+service TicketService {
+  rpc UpdateBookingStatus(BookingStatusRequest) returns (BookingStatusResponse);
+}
+
+message BookingStatusRequest {
+  string userId = 1;
+  string eventId = 2;
+  string status = 3; // Status of the booking (e.g., "confirmed", "cancelled")
+}
+
+message BookingStatusResponse {
+  enum StatusCode {
+    OK = 0;
+    ERROR = 1;
+  }
+  StatusCode code = 1;
+  string message = 2;
+}

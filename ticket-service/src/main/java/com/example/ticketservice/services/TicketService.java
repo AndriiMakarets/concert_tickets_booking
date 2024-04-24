@@ -1,5 +1,7 @@
 package com.example.ticketservice.services;
 
+import com.example.ticketservice.dto.BookTicketDTO;
+import com.example.ticketservice.dto.BookTicketsDTO;
 import com.example.ticketservice.models.Ticket;
 import com.example.ticketservice.repositories.TicketRepository;
 import lombok.RequiredArgsConstructor;
@@ -12,6 +14,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class TicketService {
     private final TicketRepository ticketRepository;
+//    private final PaymentServiceClient paymentServiceClient;
 
     public List<Ticket> getAll() {
         return ticketRepository.findAll();
@@ -21,15 +24,18 @@ public class TicketService {
         return ticketRepository.findById(id);
     }
 
-    public Ticket updateTicket(Ticket ticket){
+    public Ticket updateTicket(Ticket ticket) {
         return ticketRepository.save(ticket);
     }
 
-    public void deleteById(Long id){
+    public void deleteById(Long id) {
         ticketRepository.deleteById(id);
     }
 
-    public Ticket createTicket(Ticket ticket){
-        return ticketRepository.save(ticket);
+    public Ticket createTicket(BookTicketsDTO bookTicketsDTO) {
+//        paymentServiceClient.proceed();
+//        return ticketRepository.save(ticket);
+        //}
+        return null;
     }
 }

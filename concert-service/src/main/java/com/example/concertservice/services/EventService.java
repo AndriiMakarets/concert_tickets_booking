@@ -1,5 +1,6 @@
 package com.example.concertservice.services;
 
+import com.example.concertservice.exceptions.ResourceNotFoundException;
 import com.example.concertservice.models.Event;
 import com.example.concertservice.models.Seat;
 import com.example.concertservice.repositories.EventRepository;
@@ -21,7 +22,7 @@ private final EventRepository eventRepository;
     }
 
     public Optional<Event> getById(Long id) {
-        return null;
+        return eventRepository.findById(id);
     }
 
     public Event updateEvent(Long id, Event newEvent) {
@@ -30,16 +31,14 @@ private final EventRepository eventRepository;
     }
 
     public Event createEvent(Event event) {
-        return null;
+        return eventRepository.save(event);
     }
 
     public void deleteById(Long id) {
-
+        Event existingEvent = getById(id).orElseThrow(() -> new ResourceNotFoundException("Seat doesn't exist"));
+        eventRepository.deleteById(id);
     }
 
-    public List<Seat> getFreeSeats(Long id) {
-        return null;
-    }
 
     public void updateSeatsWithActualEvent(Event event) {
         event.getSeats().forEach(seat -> seat.setEvent(event));

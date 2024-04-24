@@ -28,10 +28,11 @@ public class EventMapperImpl implements EventMapper {
         EventTypes eventType = eventTypeService
                 .getEventTypeById(eventDTO.getEventTypeID())
                 .orElseThrow(()-> new ResourceNotFoundException("event type does not exist"));
-        List<Seat> seats = seatService.createSeats(eventDTO.getSeatsAmount());
-        Venue venue = venueService
-                .getVenueById(eventDTO.getVenueID())
-                .orElseThrow(()-> new ResourceNotFoundException("venue does not exist"));;
+            Venue venue = venueService
+                    .getVenueById(eventDTO.getVenueID())
+                    .orElseThrow(()-> new ResourceNotFoundException("venue does not exist"));
+        List<Seat> seats = seatService.createSeats(eventDTO.getSeatsAmount(), eventDTO.getRows(), eventDTO.getColumns());
+
         return Event
                 .builder()
                 .eventDate(eventDTO.getEventDate())

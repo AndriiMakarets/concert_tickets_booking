@@ -18,6 +18,9 @@ public class Booking {
     //@JoinColumn(name = "user_id", nullable = false)
     //private User user;
 
+    @Column(name = "ticket_id", nullable = false)
+    private int userEmail;
+
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "ticket_id", nullable = false)
     private List<Ticket> tickets;
