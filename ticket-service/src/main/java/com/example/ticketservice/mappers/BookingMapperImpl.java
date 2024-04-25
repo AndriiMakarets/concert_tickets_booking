@@ -16,15 +16,15 @@ public class BookingMapperImpl implements  BookingMapper{
     private final TicketService ticketService;
     @Override
     public Booking toBooking(BookingDTO bookingDTO) {
-        List<Ticket> tickets = new ArrayList<>();
-        bookingDTO.getTicketIds().forEach(id -> tickets.add(
-                ticketService
-                        .getById(id)
-                        .orElseThrow(()-> new ResourceNotFoundException("Ticket does not exist with id: " + id))));
+       // List<Long> sitsId = new ArrayList<>();
+         // bookingDTO.getSeatsId().forEach(id -> sitsId.add(
+               //  ticketService .getById(id)
+                 //       .orElseThrow(()-> new ResourceNotFoundException("Ticket does not exist with id: " + id))));
         return Booking
                 .builder()
+                .seatsId(bookingDTO.getSeatsId())
                 .bookingDate(bookingDTO.getBookingDate())
-                .tickets(tickets)
+               // .tickets(tickets)
                 .quantity(bookingDTO.getQuantity())
                 .status(Booking.BookingStatus.RESERVED)
                 .totalPrice(bookingDTO.getTotalPrice())

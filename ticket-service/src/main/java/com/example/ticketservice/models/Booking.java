@@ -6,7 +6,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.lang.reflect.Array;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 @Data
@@ -27,9 +29,12 @@ public class Booking {
     @Column(name = "ticket_id", nullable = false)
     private int userEmail;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ticket_id", nullable = false)
-    private List<Ticket> tickets;
+    //@OneToMany(fetch = FetchType.LAZY)
+    //@JoinColumn(name = "ticket_id", nullable = false)
+    //private List<Ticket> tickets;
+
+    @ElementCollection
+    private List<Long> seatsId;
 
     @Column(nullable = false)
     private int quantity; // Number of tickets booked

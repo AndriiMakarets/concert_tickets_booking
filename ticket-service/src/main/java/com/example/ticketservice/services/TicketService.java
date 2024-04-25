@@ -1,7 +1,5 @@
 package com.example.ticketservice.services;
 
-import com.example.ticketservice.dto.BookTicketsDTO;
-import com.example.ticketservice.dto.TicketDTO;
 import com.example.ticketservice.models.Ticket;
 import com.example.ticketservice.repositories.TicketRepository;
 import lombok.RequiredArgsConstructor;

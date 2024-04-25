@@ -2,8 +2,6 @@ package com.example.ticketservice.controllers;
 
 import java.util.List;
 
-import com.example.ticketservice.dto.BookTicketsDTO;
-import com.example.ticketservice.dto.TicketDTO;
 import com.example.ticketservice.exceptions.ResourceNotFoundException;
 import com.example.ticketservice.mappers.TicketMapper;
 import com.example.ticketservice.models.Ticket;

@@ -12,6 +12,7 @@ public class BookingDTO {
     private int quantity;
     private BigDecimal totalPrice;
 //    private BookingStatus status;
+    private List<Long> seatsId;
     private Date bookingDate;
     private Date createdAt;
     private Date updatedAt;
@@ -20,15 +21,15 @@ public class BookingDTO {
     public BookingDTO() {
     }
 
-    public BookingDTO(Long id, List<Long> ticketIds, int quantity, BigDecimal totalPrice, BookingStatus status, Date bookingDate, Date createdAt, Date updatedAt) {
+    public BookingDTO(Long id, Date updatedAt, Date createdAt, List<Long> seatsId, BigDecimal totalPrice, int quantity, List<Long> ticketIds, Date bookingDate) {
         this.id = id;
-        this.ticketIds = ticketIds;
-        this.quantity = quantity;
-        this.totalPrice = totalPrice;
-//        this.status = status;
-        this.bookingDate = bookingDate;
-        this.createdAt = createdAt;
         this.updatedAt = updatedAt;
+        this.createdAt = createdAt;
+        this.seatsId = seatsId;
+        this.totalPrice = totalPrice;
+        this.quantity = quantity;
+        this.ticketIds = ticketIds;
+        this.bookingDate = bookingDate;
     }
 
     // Getters and Setters
@@ -40,12 +41,28 @@ public class BookingDTO {
         this.id = id;
     }
 
+   // public List<Long> getTicketIds() {
+   //     return ticketIds;
+   // }
+
+    // public void setTicketIds(List<Long> ticketIds) {
+   //     this.ticketIds = ticketIds;
+   // }
+
     public List<Long> getTicketIds() {
         return ticketIds;
     }
 
     public void setTicketIds(List<Long> ticketIds) {
         this.ticketIds = ticketIds;
+    }
+
+    public List<Long> getSeatsId() {
+        return seatsId;
+    }
+
+    public void setSeatsId(List<Long> seatsId) {
+        this.seatsId = seatsId;
     }
 
     public int getQuantity() {
