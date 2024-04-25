@@ -1,6 +1,8 @@
 package com.example.concertservice.mappers;
 
+import com.example.concertservice.dto.EventResponseDTO;
 import com.example.concertservice.dto.SeatDTO;
+import com.example.concertservice.dto.SeatResponseDTO;
 import com.example.concertservice.exceptions.ResourceNotFoundException;
 import com.example.concertservice.models.Event;
 import com.example.concertservice.models.Seat;
@@ -9,6 +11,7 @@ import jakarta.annotation.Resource;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -32,12 +35,23 @@ public class SeatMapperImpl implements SeatMapper {
     }
 
     @Override
-    public SeatDTO toDTO(Seat seat) {
-        return null;
+    public SeatResponseDTO toDTO(Seat seat) {
+        return SeatResponseDTO
+                .builder()
+                .isOccupied(seat.isOccupied())
+                .id(seat.getId())
+                .eventID(seat.getEvent().getId())
+                .seatNumber(seat.getSeatNumber())
+                .category(seat.getCategory())
+                .price(seat.getPrice())
+                .rowNumber(seat.getRowNumber())
+                .build();
     }
 
     @Override
-    public List<SeatDTO> listToDTO(List<Seat> seats) {
-        return null;
+    public List<SeatResponseDTO> listToDTO(List<Seat> seats) {
+        List<SeatResponseDTO> responseDTOS = new ArrayList<>();
+        seats.forEach(seat -> responseDTOS.add(toDTO(seat)));
+        return responseDTOS;
     }
 }

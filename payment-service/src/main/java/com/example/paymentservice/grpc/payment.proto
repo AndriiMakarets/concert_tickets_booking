@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package paymentservice;
+
+
+
+service PaymentService {
+  rpc UpdateBookingStatus(BookingStatusRequest) returns (BookingStatusResponse);
+}
+
+
+message BookingStatusRequest {
+  string bookingId = 1;
+  enum BookingStatus {
+    RESERVED = 0;
+    PAID = 1;
+    CANCELLED =2;
+  }
+  BookingStatus newStatus = 2;
+}
+
+message BookingStatusResponse {
+  enum StatusCode {
+    OK = 0;
+    ERROR = 1;
+  }
+  StatusCode code = 1;
+  string message = 2;
+}

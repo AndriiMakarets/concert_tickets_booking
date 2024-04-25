@@ -2,25 +2,28 @@ syntax = "proto3";
 
 package paymentservice;
 
+
+
 service PaymentService {
-  rpc ProcessPayment(PaymentRequest) returns (PaymentResponse);
+  rpc UpdateBookingStatus(BookingStatusRequest) returns (BookingStatusResponse);
 }
 
-message PaymentRequest {
-  string userEmail = 1;
-  string eventId = 2;
-  double amount = 3;
-  string currency = 4;
-  string paymentMethod = 5;
-}
 
-message PaymentResponse {
-  enum PaymentStatus {
-    PENDING = 0;
-    COMPLETED = 1;
-    FAILED = 2;
-    REFUNDED = 3;
+message BookingStatusRequest {
+  string bookingId = 1;
+  enum BookingStatus {
+    RESERVED = 0;
+    PAID = 1;
+    CANCELLED =2;
   }
-  PaymentStatus status = 1;
+  BookingStatus newStatus = 2;
+}
+
+message BookingStatusResponse {
+  enum StatusCode {
+    OK = 0;
+    ERROR = 1;
+  }
+  StatusCode code = 1;
   string message = 2;
 }

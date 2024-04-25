@@ -1,7 +1,7 @@
 package com.example.ticketservice.services;
 
-import com.example.ticketservice.dto.BookTicketDTO;
 import com.example.ticketservice.dto.BookTicketsDTO;
+import com.example.ticketservice.dto.TicketDTO;
 import com.example.ticketservice.models.Ticket;
 import com.example.ticketservice.repositories.TicketRepository;
 import lombok.RequiredArgsConstructor;
@@ -32,10 +32,7 @@ public class TicketService {
         ticketRepository.deleteById(id);
     }
 
-    public Ticket createTicket(BookTicketsDTO bookTicketsDTO) {
-//        paymentServiceClient.proceed();
-//        return ticketRepository.save(ticket);
-        //}
-        return null;
+    public Ticket createTicket(Ticket ticket) {
+        return ticketRepository.save(ticket);
     }
 }

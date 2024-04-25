@@ -2,8 +2,8 @@ package com.example.ticketservice.controllers;
 
 import java.util.List;
 
-import com.example.ticketservice.dto.BookTicketDTO;
 import com.example.ticketservice.dto.BookTicketsDTO;
+import com.example.ticketservice.dto.TicketDTO;
 import com.example.ticketservice.exceptions.ResourceNotFoundException;
 import com.example.ticketservice.mappers.TicketMapper;
 import com.example.ticketservice.models.Ticket;
@@ -38,9 +38,8 @@ public class TicketController {
     }
     @Transactional
     @PostMapping("/")
-    public ResponseEntity<Ticket> createTicket(@RequestBody BookTicketsDTO bookTicketsDTO) {
-
-        Ticket savedTicket = ticketService.createTicket(bookTicketsDTO);
+    public ResponseEntity<Ticket> createTicket(@RequestBody Ticket ticket) {
+        Ticket savedTicket = ticketService.createTicket(ticket);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedTicket);
     }
 

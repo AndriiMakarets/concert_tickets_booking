@@ -1,6 +1,7 @@
 package com.example.concertservice.controllers;
 
 import com.example.concertservice.dto.SeatDTO;
+import com.example.concertservice.dto.SeatResponseDTO;
 import com.example.concertservice.exceptions.ResourceNotFoundException;
 import com.example.concertservice.mappers.EventMapper;
 import com.example.concertservice.mappers.SeatMapper;
@@ -28,9 +29,10 @@ public class SeatController {
         return new ResponseEntity<>(createdSeat, HttpStatus.CREATED);
     }
 
+    //add pagination here too
     @GetMapping
-    public ResponseEntity<List<Seat>> getAllSeats() {
-        List<Seat> seats = seatService.getAllSeats();
+    public ResponseEntity<List<SeatResponseDTO>> getAllSeats() {
+        List<SeatResponseDTO> seats = seatMapper.listToDTO(seatService.getAllSeats());
         return new ResponseEntity<>(seats, HttpStatus.OK);
     }
 

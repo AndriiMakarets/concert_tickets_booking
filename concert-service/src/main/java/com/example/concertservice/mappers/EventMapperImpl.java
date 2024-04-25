@@ -2,6 +2,7 @@ package com.example.concertservice.mappers;
 
 import com.example.concertservice.dto.EventCreationDTO;
 import com.example.concertservice.dto.EventDTO;
+import com.example.concertservice.dto.EventResponseDTO;
 import com.example.concertservice.exceptions.*;
 
 import com.example.concertservice.models.*;
@@ -12,6 +13,7 @@ import com.example.concertservice.services.VenueService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -47,13 +49,26 @@ public class EventMapperImpl implements EventMapper {
     }
 
     @Override
-    public EventDTO toDTO(Event event) {
-        return null;
+    public EventResponseDTO toDTO(Event event) {
+        return EventResponseDTO
+                .builder()
+                .id(event.getId())
+                .eventTypeID(event.getEventType().getId())
+                .seatsAmount(event.getVenue().getCapacity())
+                .venueID(event.getVenue().getId())
+                .eventDate(event.getEventDate())
+                .description(event.getDescription())
+                .name(event.getName())
+                .saleEndDate(event.getSaleEndDate())
+                .saleStartDate(event.getSaleStartDate())
+                .build();
     }
 
     @Override
-    public List<EventDTO> listToDTO(List<Event> events) {
-        return null;
+    public List<EventResponseDTO> listToDTO(List<Event> events) {
+        List<EventResponseDTO> responseDTOS = new ArrayList<>();
+        events.forEach(event -> responseDTOS.add(toDTO(event)));
+        return responseDTOS;
     }
 
 

@@ -22,28 +22,24 @@ public class PaymentController {
     private final PaymentMapper paymentMapper;
 
     @GetMapping()
-    public ResponseEntity<List<PaymentDTO>> getPayments() {
+    public ResponseEntity<List<Payment>> getPayments() {
         List<Payment> payments = paymentService.getAll();
-        List<PaymentDTO> paymentsDTO = paymentMapper.listToDTO(payments);
-        return ResponseEntity.ok().body(paymentsDTO);
+        return ResponseEntity.ok().body(payments);
     }
 
     @Transactional
     @PutMapping("/{id}")
-    public ResponseEntity<PaymentDTO> updatePayment(@RequestBody PaymentDTO paymentDTO, @PathVariable Long id) {
+    public ResponseEntity<Payment> updatePayment(@RequestBody Payment payment, @PathVariable Long id) {
 
-        Payment newPayment = paymentMapper.toPayment(paymentDTO);
         Payment paymentToUpdate = paymentService.getById(id).orElseThrow(() -> new ResourceNotFoundException("Payment doesn't exist"));
-        newPayment.setId(id);
-        Payment updatedPayment = paymentService.updatePayment(newPayment);
-        return ResponseEntity.ok(paymentMapper.toDTO(updatedPayment));
+        payment.setId(id);
+        Payment updatedPayment = paymentService.updatePayment(payment);
+        return ResponseEntity.ok(updatedPayment);
 
     }
     @Transactional
     @PostMapping
-    public ResponseEntity<Payment> createPayment(@RequestBody PaymentDTO paymentDTO) {
-        Payment payment = paymentMapper.toPayment(paymentDTO);
-        //add venue and any other dependencies. Use grpc call here.
+    public ResponseEntity<Payment> createPayment(@RequestBody Payment payment) {
         Payment savedPayment = paymentService.createPayment(payment);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedPayment);
     }
@@ -54,7 +50,7 @@ public class PaymentController {
         return ResponseEntity.status(HttpStatus.CREATED).body(paymentService.getById(id).orElseThrow(() -> new ResourceNotFoundException("Payment doesn't exist")));
     }
 
-    @Transactional //delete all connected entities
+    @Transactional
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deletePayment(@PathVariable Long id) {
         paymentService.deleteById(id);

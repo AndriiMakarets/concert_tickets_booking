@@ -17,8 +17,7 @@ import java.util.Optional;
 public class EventService {
 private final EventRepository eventRepository;
     public List<Event> getAll(Specification<Event> spec, PageRequest pageRequest) {
-       // return eventRepository.findAll(spec, pageRequest).getContent();
-        return null;
+        return eventRepository.findAll(spec, pageRequest).getContent().stream().toList();
     }
 
     public Optional<Event> getById(Long id) {

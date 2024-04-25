@@ -3,15 +3,15 @@ package com.example.concertservice.dto;
 import lombok.*;
 
 import java.util.Date;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
 @Builder
-public class EventDTO {
+public class EventResponseDTO {
+    private Long id;
     private int seatsAmount;
-    private int rows;
-    private int columns;
     private String name;
     private String description;
     private Long eventTypeID;

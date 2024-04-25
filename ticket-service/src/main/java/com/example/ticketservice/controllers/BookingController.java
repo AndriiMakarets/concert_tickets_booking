@@ -8,19 +8,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.List;
 
-
-import com.example.ticketservice.dto.BookingDTO;
 import com.example.ticketservice.exceptions.ResourceNotFoundException;
 import com.example.ticketservice.mappers.BookingMapper;
-import com.example.ticketservice.models.Booking;
 import com.example.ticketservice.services.BookingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
 @RestController("api/v1/ticket-booking/bookings")
 @RequiredArgsConstructor
@@ -45,21 +39,20 @@ public class BookingController {
         return ResponseEntity.ok().body(bookingDTO);
     }
 
+    //External user can create only booking with status "CREATED"
     @PostMapping()
-    public ResponseEntity<BookingDTO> createBooking(@RequestBody BookingDTO bookingDTO) {
-        Booking booking = bookingMapper.toEntity(bookingDTO);
+    public ResponseEntity<Booking> createBooking(@RequestBody BookingDTO bookingDTO) {
+        Booking booking = bookingMapper.toBooking(bookingDTO);
         Booking createdBooking = bookingService.createBooking(booking);
-        BookingDTO createdBookingDTO = bookingMapper.toDTO(createdBooking);
-        return ResponseEntity.status(HttpStatus.CREATED).body(createdBookingDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdBooking);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<BookingDTO> updateBooking(@PathVariable Long id, @RequestBody BookingDTO bookingDTO) {
-        Booking booking = bookingMapper.toEntity(bookingDTO);
+    public ResponseEntity<Booking> updateBooking(@PathVariable Long id, @RequestBody BookingDTO bookingDTO) {
+        Booking booking = bookingMapper.toBooking(bookingDTO);
         booking.setId(id);
         Booking updatedBooking = bookingService.updateBooking(booking);
-        BookingDTO updatedBookingDTO = bookingMapper.toDTO(updatedBooking);
-        return ResponseEntity.ok().body(updatedBookingDTO);
+        return ResponseEntity.ok().body(updatedBooking);
     }
 
     @DeleteMapping("/{id}")

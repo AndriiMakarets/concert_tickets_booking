@@ -2,11 +2,14 @@ package com.example.concertservice.controllers;
 
 import com.example.concertservice.dto.EventCreationDTO;
 import com.example.concertservice.dto.EventDTO;
+import com.example.concertservice.dto.EventResponseDTO;
 import com.example.concertservice.exceptions.ResourceNotFoundException;
 import com.example.concertservice.mappers.EventMapper;
 import com.example.concertservice.models.Event;
+import com.example.concertservice.models.EventTypes;
 import com.example.concertservice.models.Seat;
 import com.example.concertservice.services.EventService;
+import com.example.concertservice.services.EventTypeService;
 import com.example.concertservice.services.SeatService;
 import com.example.concertservice.specifications.EventSpecifications;
 import lombok.RequiredArgsConstructor;
@@ -26,11 +29,13 @@ import java.util.List;
 @RequiredArgsConstructor
 public class EventController {
     private final EventService eventService;
+    private final EventTypeService eventTypeService;
+
     private final SeatService seatService;
     private final EventMapper eventMapper;
 
     @GetMapping()
-    public ResponseEntity<List<Event>> getEvents(
+    public ResponseEntity<List<EventResponseDTO>> getEvents(
             @RequestParam(required = false, defaultValue = "0") int page,
             @RequestParam(required = false, defaultValue = "10") int size,
             @RequestParam(required = false) String city,
@@ -43,16 +48,26 @@ public class EventController {
         if (city != null) {
             spec = spec.and(EventSpecifications.byCity(city));
         }
-        if (from != null && to != null) {
-            spec = spec.and(EventSpecifications.byDateRange(from, to));
+//        if (from != null && to != null) {
+//            spec = spec.and(EventSpecifications.byDateRange(from, to));
+//        }
+
+        if(from != null){
+            spec = spec.and(EventSpecifications.byStartDate(from));
         }
+
+        if(to != null){
+            spec = spec.and(EventSpecifications.byEndDate(to));
+        }
+
         if (type_id != null) {
-            spec = spec.and(EventSpecifications.byType(type_id));
+            EventTypes eventType = eventTypeService.getEventTypeById(type_id)
+                    .orElseThrow(()-> new ResourceNotFoundException("Event type with id does not exist: " + type_id));
+            spec = spec.and(EventSpecifications.byType(eventType));
         }
 
         List<Event> events = eventService.getAll(spec, PageRequest.of(page, size));
-//        List<EventDTO> eventsDTO = eventMapper.listToDTO(events);
-        return ResponseEntity.ok().body(events);
+        return ResponseEntity.ok().body(eventMapper.listToDTO(events));
     }
 
     @Transactional

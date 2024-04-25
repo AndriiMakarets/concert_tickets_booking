@@ -31,8 +31,15 @@ public class Seat {
     @Column(name = "is_occupied")
     private boolean isOccupied;  // чи зайняте місце
 
+    public enum Category {
+        VIP,
+        Standard,
+        Fan
+    }
+
+    @Enumerated(EnumType.STRING)
     @Column(name = "category")
-    private String category;  // категорія місця (наприклад, VIP, стандарт тощо)
+    private Category category;  // категорія місця (наприклад, VIP, стандарт тощо)
 
     @Column(name = "price")
     private double price;  // ціна місця

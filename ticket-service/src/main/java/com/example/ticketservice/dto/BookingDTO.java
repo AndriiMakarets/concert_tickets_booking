@@ -11,7 +11,7 @@ public class BookingDTO {
     private List<Long> ticketIds;
     private int quantity;
     private BigDecimal totalPrice;
-    private BookingStatus status;
+//    private BookingStatus status;
     private Date bookingDate;
     private Date createdAt;
     private Date updatedAt;
@@ -25,7 +25,7 @@ public class BookingDTO {
         this.ticketIds = ticketIds;
         this.quantity = quantity;
         this.totalPrice = totalPrice;
-        this.status = status;
+//        this.status = status;
         this.bookingDate = bookingDate;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
@@ -64,13 +64,13 @@ public class BookingDTO {
         this.totalPrice = totalPrice;
     }
 
-    public BookingStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(BookingStatus status) {
-        this.status = status;
-    }
+//    public BookingStatus getStatus() {
+//        return status;
+//    }
+//
+//    public void setStatus(BookingStatus status) {
+//        this.status = status;
+//    }
 
     public Date getBookingDate() {
         return bookingDate;
