@@ -1,0 +1,18 @@
+
+syntax = "proto3";
+
+// Definition of the EventService
+service EventService {
+  rpc GetEventDetails(GetEventDetailsRequest) returns (GetEventDetailsResponse);
+}
+
+message GetEventDetailsRequest {
+  string event_id = 1;
+}
+
+message GetEventDetailsResponse {
+  string event_name = 1;
+  string venue_name = 2;
+  string event_time = 3;
+  // Include additional fields like event description, venue details, etc.
+}
