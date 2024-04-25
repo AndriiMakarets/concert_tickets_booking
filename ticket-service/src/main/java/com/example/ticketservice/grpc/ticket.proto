@@ -6,6 +6,8 @@ service TicketService {
   rpc UpdateBookingStatus(BookingStatusRequest) returns (BookingStatusResponse);
 }
 
+
+
 message BookingStatusRequest {
   string userId = 1;
   string eventId = 2;
